@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+:root {
+    --corDeFundo: #660033; /*(Bordô), cor mais forte */
+    --corDestaque: #FFD700; /*(Dourado), cor destaque */
+    --corNeutra: #F5F5DC; /*(Bege), cor neutra */
+    --corContraste: #4B3621  /*(Café), cor contraste */
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    background-color: var(--corDeFundo) ;
+    color: var(--corContraste
+    );
+}
