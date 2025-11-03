@@ -1,30 +1,31 @@
 @charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --corDominante:#f5f5d6a9; /*Fundos, áreas de texto extensas, espaços*/
-    --corSecundaria: #800020; /*Títulos importantes, botões primários, elementos gráficos do vinho, talvez bordas e rodapés.*/
-    --corDestaque: #DAA520; /*Detalhes de ícones, linhas de destaque, texto de chamadas para ação (CTA) secundárias, elementos decorativos sutis que você queira que transmitam luxo ou qualidade premium.*/ 
+    --corDominante: #f5f5d6a9;
+    --corSecundaria: #800020;
+    --corDestaque: #DAA520;
     --fonteTitulo: "Merriweather", serif;
     --fonteCorpo: "Roboto", sans-serif;
 }
 
 body {
     background-color: var(--corDominante);
-    
 }
 
 * {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 nav {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    /* Centraliza verticalmente os itens do nav */
 }
 
 nav img {
@@ -32,39 +33,41 @@ nav img {
     height: 100px;
 }
 
-nav > a {
+nav>a {
     text-decoration: none;
     color: var(--corSecundaria);
     font-family: var(--fonteTitulo);
-    margin-top: 20px;
     font-weight: 650;
     font-size: 1.1em;
 }
 
-nav > a:hover {
+nav>a:hover {
     transition: transform 1.2s ease;
     transform: scale(1.1);
     text-decoration: underline;
 }
 
-
 .about {
-    margin: 30px; 
-    padding: 20px; 
+    margin: 30px;
+    padding: 20px;
     background-color: #c5951d2d;
     box-shadow: 2px 1.5px 2px rgba(0, 0, 0, 0.308);
 }
 
-.about > h2 {
+.about>h2 {
     text-align: left;
     font-family: var(--fonteTitulo);
     padding: 10px;
     font-size: 1.8em;
+    text-shadow: 1px 1px 1px rgba(48, 48, 48, 0.404)
 }
 
-.about > figure > img {
+.about>figure>img {
     margin-top: 30px;
     border: 1px solid black;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 figcaption {
@@ -75,6 +78,10 @@ figcaption {
     font-weight: 400;
 }
 
+.preco {
+    text-align: center;
+    font-weight: bolder;
+}
 
 .texto {
     padding: 20px;
@@ -82,30 +89,27 @@ figcaption {
     font-size: 1.2em;
     text-align: justify;
     letter-spacing: 1px;
-    line-height: 24px;
+    line-height: 1.5;
+    /* Melhor para leitura */
 }
 
-#grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.texto > h2 {
+    font-family: var(--fonteTitulo);
+    text-shadow: 1px 1px 1px rgba(48, 48, 48, 0.404);
+    
+}
+
+.conteinerFlex {
+    display: flex;
+    justify-content: center;
     gap: 20px;
-}
-
-ul li {
-    list-style: none;
-}
-
-.icones-rede-social {
-    border-radius: 50%;
-    margin-right: 100px;
-    margin-top: 100px;
 }
 
 .links {
     text-align: center;
 }
 
-.links > a {
+.links>a {
     text-decoration: none;
     font-family: var(--fonteCorpo);
     padding: 10px;
@@ -113,7 +117,84 @@ ul li {
     font-weight: bolder;
 }
 
-.links > a:hover {
+.links>a:hover {
     text-decoration: underline;
 }
 
+
+/* 1. O CONTAINER PAI DO CARROSSEL */
+.carrossel-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    /* Centraliza na página */
+}
+
+/* 2. O TRILHO (Onde os itens deslizam) */
+.trilho {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;   
+    scrollbar-width: none; /* ----ESCONDER A BARRA---- */
+
+}
+
+/* Para Chrome, Safari e Edge */
+.trilho::-webkit-scrollbar {
+    display: none;
+}
+
+/* 3. OS ITENS (Os cards) */
+.item {
+    /* Define que 3 itens cabem na tela (100% / 3) */
+    width: calc(100% / 3);
+    flex-shrink: 0;
+    scroll-snap-align: start;
+
+    /* Faz o padding ser INCLUÍDO na largura */
+    box-sizing: border-box;
+
+    /* Espaçamento (5px de cada lado = 10px entre itens) */
+    padding: 0 5px;
+}
+
+/* 4. OS BOTÕES (Estilo e Posição) */
+.btn-prev,
+.btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-prev {
+    left: -20px;
+}
+
+.btn-next {
+    right: -20px;
+}
+
+/* 5. [MELHORIA] Faz as imagens se ajustarem ao card */
+.item figure {
+    /* O figure deve preencher o item */
+    width: 100%;
+    margin: 0;
+    /* Remove margem padrão do figure */
+}
+
+.item figure img {
+    /* A imagem se ajusta ao 'figure' */
+    width: 100%;
+    height: auto;
+    /* Mantém a proporção */
+    display: block;
+    /* Remove espaço extra abaixo da imagem */
+}
