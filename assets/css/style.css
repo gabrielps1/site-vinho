@@ -63,11 +63,12 @@ nav>a:hover {
 }
 
 .about>figure>img {
-    margin-top: 30px;
-    border: 1px solid black;
+    
+    border-radius: 5px;
     max-width: 100%;
     height: auto;
     display: block;
+    margin: auto;
 }
 
 figcaption {
@@ -197,4 +198,4 @@ figcaption {
     /* Mantém a proporção */
     display: block;
     /* Remove espaço extra abaixo da imagem */
-}
+} 
